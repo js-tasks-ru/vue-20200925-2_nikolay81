@@ -6,5 +6,8 @@
  * @return {Number} сумма чисел a и b
  */
 export function sum(a, b) {
-  // Решение
+  const saveA = isNaN(parseFloat(a)) ? 0 : parseFloat(a);
+  const saveB = isNaN(parseInt(b)) ? 0 : parseInt(b);
+
+  return saveA + saveB;
 }
