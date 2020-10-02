@@ -3,10 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>CounterButton</title>
+  <style>
+    #counter-button {
+      font-size: 2rem;
+      padding: .5rem;
+      cursor: pointer;
+    }
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Решение -->
+  <div id="app" v-cloak>
+    <button 
+      id="counter-button"
+      @click="onButtonClick">{{ counter }}</button>
+  </div>
 
 <script type="module" src="script.js"></script>
 </body>
