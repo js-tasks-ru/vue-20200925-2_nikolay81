@@ -1,12 +1,13 @@
 <template>
   <div class="toasts">
-    <div class="toast toast_success">
-      <app-icon icon="check-circle" />
-      <span>Success</span>
-    </div>
-    <div class="toast toast_error">
-      <app-icon icon="alert-circle" />
-      <span>Error</span>
+    <div 
+      v-for="item in messages"
+      :key="item.date"
+      class="toast"
+      :class="item.toastClass">
+      <app-icon
+        :icon="item.toastIconClass" />
+      <span>{{ item.message }}</span>
     </div>
   </div>
 </template>
@@ -21,10 +22,70 @@ export default {
 
   components: { AppIcon },
 
-  methods: {
-    error(message) {},
+  data: () => ({
+    /**
+     * Массив сообщений
+     * Структура элемента
+     * @param {Number} date - timestamp в качестве ID
+     * @param {String} message - текст сообщение
+     * @param {String} type - тип сообщения success | error
+     * @param {String} toastClass - стиль тоста
+     * @param {String} toastIconClass - стиль иконки тоста
+     */
+    messages: [],
+    /**
+     * Объект таймеров
+     * ключ ID таймер
+     * значение date (ID) сообщения
+     */
+    timers: {},
+  }),
 
-    success(message) {},
+  methods: {
+    error(message) {
+      this.addMessage({
+        message,
+        type: 'error',
+        toastClass: 'toast_error',
+        toastIconClass: 'alert-circle',
+      })
+    },
+
+    success(message) {
+      this.addMessage({
+        message,
+        type: 'success',
+        toastClass: 'toast_success',
+        toastIconClass: 'check-circle',
+      })
+    },
+
+    addMessage(options) {
+      const date = new Date().getTime()
+
+      this.timers[date] = setTimeout(
+        this.removeMessage.bind(this, date),
+        DELAY,
+      )
+
+      this.messages = this.messages.concat({
+        ...options,
+        date,
+      })
+    },
+
+    removeMessage(date) {
+      const index = this.messages.findIndex(
+        item => item.date === date
+      )
+
+      clearTimeout(this.timers[date])
+      delete this.timers[date]
+
+      if (index < 0) return // Чтоб не выкинуть последний элемент
+
+      this.messages.splice(index, 1)
+    },
   },
 };
 </script>
