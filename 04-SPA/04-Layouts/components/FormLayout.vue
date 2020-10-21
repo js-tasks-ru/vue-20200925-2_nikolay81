@@ -1,8 +1,19 @@
-<template></template>
+<template>
+  <div>
+    <h1>{{ title }}</h1>
+    <slot />
+  </div>
+</template>
 
 <script>
 export default {
-  name: 'FormLayout',
+  name: 'FormLayout', 
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 

@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div class="footer">Это футер (с) это коперайт</div>
+</template>
 
 <script>
 export default {
@@ -6,4 +8,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.footer {
+  padding: 100px 0 60px;
+  text-align: center;
+}
+</style>
