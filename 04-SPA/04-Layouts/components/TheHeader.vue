@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <h1>Meetups</h1>
+    <h1>
+      Meetups
+    </h1>
     <nav>
       <router-link :to="{ name: 'meetups' }">Митапы</router-link>
       <router-link :to="{ name: 'form' }">Создать митап</router-link>

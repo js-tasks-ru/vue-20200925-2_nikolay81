@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="wrapper bg-grey">
     <TheHeader />
-    <slot />
+    <main class="main">
+      <slot />
+    </main>
     <TheFooter />
   </div>
 </template>
@@ -20,6 +22,14 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.bg-grey {
+  background-color: var(--grey-light);
+}
 main {
   flex: 1 0 auto;
 }
