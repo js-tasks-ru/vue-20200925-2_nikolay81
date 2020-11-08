@@ -7,8 +7,6 @@ const LoginPage = require(getSolutionPath('views/LoginPage')).default;
 const RegisterPage = require(getSolutionPath('views/RegisterPage')).default;
 const data = require(getSolutionPath('data'));
 
-global.alert = jest.fn();
-
 describe('SPA/AuthPages', () => {
   const email = 'demo@email';
   const fullname = 'Demo Organizer';
@@ -21,6 +19,8 @@ describe('SPA/AuthPages', () => {
     let form;
 
     beforeEach(() => {
+      global.alert = jest.fn();
+
       wrapper = shallowMount(LoginPage);
       const inputs = wrapper.findAll('input').wrappers;
       emailInput = inputs[0];
@@ -80,6 +80,8 @@ describe('SPA/AuthPages', () => {
     let form;
 
     beforeEach(() => {
+      global.alert = jest.fn();
+
       wrapper = shallowMount(RegisterPage);
       const inputs = wrapper.findAll('input').wrappers;
       emailInput = inputs[0];
@@ -102,7 +104,7 @@ describe('SPA/AuthPages', () => {
     it('RegisterPage должен выводить "Требуется ввести полное имя" при сабмите без полного имени', async () => {
       await emailInput.setValue(email);
       await form.trigger('submit');
-      expect(global.alert).toHaveBeenCalledWith('Требуется ввести пароль');
+      expect(global.alert).toHaveBeenCalledWith('Требуется ввести полное имя');
     });
 
     it('RegisterPage должен выводить "Требуется ввести пароль" при сабмите без пароля', async () => {
